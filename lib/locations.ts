@@ -15,6 +15,7 @@ export type Location = {
   phone: string
   hours: DayHours[]
   instagram: string
+  facebook?: string
   tiktok?: string
   delivery?: string[]
   flavors: string[]
@@ -176,6 +177,7 @@ export const locations: Location[] = [
       h("12:00", "23:00"),
     ],
     instagram: "froyocafe_aberdeen",
+    facebook: "https://www.facebook.com/p/Fro-Yo-Cafe-100054461860708/",
     delivery: ["DoorDash", "Uber Eats", "Grubhub"],
     flavors: [
       "Banana",
@@ -330,6 +332,8 @@ export const locations: Location[] = [
       h("13:00", "23:00"),
     ],
     instagram: "froyocafe_manalapan",
+    facebook:
+      "https://www.facebook.com/p/Fro-Yo-Cafe-Manalapan-61578368165393/",
     tiktok: "froyocafemanalapan",
     flavors: sharedFlavors,
     toppings: sharedToppings,

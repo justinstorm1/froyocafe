@@ -9,16 +9,6 @@ export const site = {
     text: "Fro Yo Aberdeen turns 15 on Oct 24th! Come celebrate with us.",
     secondary: "Fro Yo Brick is coming early '27",
   },
-  facebook: [
-    {
-      label: "Aberdeen",
-      href: "https://www.facebook.com/p/Fro-Yo-Cafe-100054461860708/",
-    },
-    {
-      label: "Manalapan",
-      href: "https://www.facebook.com/p/Fro-Yo-Cafe-Manalapan-61578368165393/",
-    },
-  ],
   press: {
     outlet: "93.9 The Point",
     title: "This Beloved Monmouth County Frozen Yogurt Shop Is a Must Visit",

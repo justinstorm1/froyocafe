@@ -6,7 +6,7 @@ import {
   InstagramIcon,
   TikTokIcon,
 } from "@/components/social-icons"
-import { fullAddress, locations, telHref } from "@/lib/locations"
+import { fullAddress, locations, telHref, type Location } from "@/lib/locations"
 import { site } from "@/lib/site"
 
 export function SiteFooter() {
@@ -22,49 +22,6 @@ export function SiteFooter() {
           <p className="max-w-xs text-white/75">
             Family owned and operated since {site.founded}. {site.tagline}
           </p>
-          <div className="flex flex-wrap gap-2">
-            {locations.map((l) => (
-              <a
-                key={l.slug}
-                href={`https://www.instagram.com/${l.instagram}/`}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`Instagram: Fro Yo Cafe ${l.name}`}
-                title={`@${l.instagram}`}
-                className="inline-flex size-10 items-center justify-center rounded-full bg-white/10 transition hover:bg-pink"
-              >
-                <InstagramIcon className="size-5" />
-              </a>
-            ))}
-            {site.facebook.map((f) => (
-              <a
-                key={f.href}
-                href={f.href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`Facebook: Fro Yo Cafe ${f.label}`}
-                title={`Facebook — ${f.label}`}
-                className="inline-flex size-10 items-center justify-center rounded-full bg-white/10 transition hover:bg-sky"
-              >
-                <FacebookIcon className="size-5" />
-              </a>
-            ))}
-            {locations
-              .filter((l) => l.tiktok)
-              .map((l) => (
-                <a
-                  key={l.tiktok}
-                  href={`https://www.tiktok.com/@${l.tiktok}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`TikTok: Fro Yo Cafe ${l.name}`}
-                  title={`@${l.tiktok}`}
-                  className="inline-flex size-10 items-center justify-center rounded-full bg-white/10 transition hover:bg-mint"
-                >
-                  <TikTokIcon className="size-5" />
-                </a>
-              ))}
-          </div>
         </div>
 
         <div className="grid gap-8 sm:grid-cols-3">
@@ -83,6 +40,7 @@ export function SiteFooter() {
               >
                 {l.phone}
               </a>
+              <LocationSocials location={l} />
             </div>
           ))}
         </div>
@@ -99,5 +57,50 @@ export function SiteFooter() {
         </div>
       </div>
     </footer>
+  )
+}
+
+const iconLinkClass =
+  "inline-flex size-9 items-center justify-center rounded-full bg-white/10 transition"
+
+function LocationSocials({ location: l }: { location: Location }) {
+  const links = [
+    {
+      network: "Instagram",
+      href: `https://www.instagram.com/${l.instagram}/`,
+      Icon: InstagramIcon,
+      hover: "hover:bg-pink",
+    },
+    l.facebook && {
+      network: "Facebook",
+      href: l.facebook,
+      Icon: FacebookIcon,
+      hover: "hover:bg-sky",
+    },
+    l.tiktok && {
+      network: "TikTok",
+      href: `https://www.tiktok.com/@${l.tiktok}`,
+      Icon: TikTokIcon,
+      hover: "hover:bg-mint",
+    },
+  ].filter((link) => !!link)
+
+  return (
+    <ul className="flex gap-2 pt-2">
+      {links.map(({ network, href, Icon, hover }) => (
+        <li key={network}>
+          <a
+            href={href}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`${network}: Fro Yo Cafe ${l.name}`}
+            title={`${network} — ${l.name}`}
+            className={`${iconLinkClass} ${hover}`}
+          >
+            <Icon className="size-[1.125rem]" />
+          </a>
+        </li>
+      ))}
+    </ul>
   )
 }
